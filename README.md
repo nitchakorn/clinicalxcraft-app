@@ -16,6 +16,19 @@ This is the restructured successor to the v1 Streamlit app. Same idea, cleaner b
 - **Clone and run.** No OAuth, no remote warehouse, no short-lived tokens — the v1 pain
   points are gone. The data plane is a local file queried in-process with DuckDB.
 
+## Try it
+
+**Just want to look?** Download this repo (green **Code** button → **Download ZIP**), unzip,
+and open `web/index.html` in your browser. The full dashboard — charts, filters, and the
+patient-by-patient ledger — works with zero setup. The "Ask" box shows demo answers in this
+mode.
+
+**Want the live AI agent** that answers your own plain-English questions? It needs Python and
+a Nebius API key — see [Run it](#run-it) below; it's three commands.
+
+> Looking for the simplest thing to hand a colleague — one file, nothing to install? See the
+> companion repo **[clinicalxcraft-viewer](https://github.com/nitchakorn/clinicalxcraft-viewer)**.
+
 ## Layout
 
 ```
