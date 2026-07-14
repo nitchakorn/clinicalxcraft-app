@@ -36,11 +36,27 @@ QUICK_ASKS = [
 
 st.set_page_config(page_title="ClinicalxCRAFT — KIRC Cohort Console", page_icon="🧬", layout="wide")
 
+# Edge-to-edge: widen the main container, trim default padding/empty space, drop iframe border.
+st.html(
+    """
+    <style>
+      .block-container { padding: 1.1rem 1.4rem 1rem 1.4rem; max-width: 100%; }
+      [data-testid="stIFrame"], iframe { border: none; }
+    </style>
+    """
+)
+
 if "question" not in st.session_state:
     st.session_state["question"] = QUICK_ASKS[0][1]
 
 # --- Ask (agent) — top of the page ---
 st.markdown("##### 🧬 Ask ClinicalxCRAFT — explore the TCGA-KIRC cohort in plain English")
+st.caption(
+    "⚠️ **Early prototype (v1)** — no safety guardrails and the prompting isn't hardened yet. "
+    "It answers **only** from the bundled TCGA Pan-Cancer Atlas + IDC cohort data it can query, and "
+    "pulls background context from the **general web (Wikipedia)** — not vetted clinical literature. "
+    "Treat every answer as exploratory: verify it against the data, and don't use it for clinical decisions."
+)
 if not os.environ.get("NEBIUS_API_KEY"):
     st.info("The live agent needs a Nebius API key. Set NEBIUS_API_KEY in this app's Secrets to enable it.")
 
@@ -49,7 +65,7 @@ run_now = False
 # quick-ask chips (clicking one fills the box and runs it)
 chip_cols = st.columns(len(QUICK_ASKS))
 for i, (label, q) in enumerate(QUICK_ASKS):
-    if chip_cols[i].button(label, key=f"qa_{i}", use_container_width=True):
+    if chip_cols[i].button(label, key=f"qa_{i}", width="stretch"):
         st.session_state["question"] = q
         run_now = True
 
@@ -60,7 +76,7 @@ question = c_in.text_input(
     label_visibility="collapsed",
     placeholder="Ask a question about the KIRC cohort…",
 )
-if c_go.button("Ask", type="primary", use_container_width=True):
+if c_go.button("Ask", type="primary", width="stretch"):
     st.session_state["question"] = question
     run_now = True
 
