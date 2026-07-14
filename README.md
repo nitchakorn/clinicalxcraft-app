@@ -1,3 +1,13 @@
+---
+title: ClinicalxCRAFT
+emoji: 🧬
+colorFrom: green
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # ClinicalxCRAFT v2
 
 A cohort console for clinicians who don't code SQL. Explore the TCGA **KIRC** cohort
