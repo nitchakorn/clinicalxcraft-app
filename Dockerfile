@@ -4,9 +4,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install dependencies first (better layer caching)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies first (better layer caching). Lean set — no Streamlit.
+COPY requirements-docker.txt .
+RUN pip install --no-cache-dir -r requirements-docker.txt
 
 # Copy only what the FastAPI app needs (no .env, no .venv, no git)
 COPY app ./app
